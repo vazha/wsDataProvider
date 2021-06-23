@@ -1,9 +1,21 @@
 package services
 
-import "github.com/vazha/wsDataProvider/pkg/types"
+import (
+	"fmt"
+	"github.com/vazha/wsDataProvider/pkg/services/kraken"
+)
 
-func NewRobot() *types.AllBooks {
-	return &types.AllBooks{
+type Exchange interface {
+	Start()
+	Stop()
+	Subscribe([]string)
+}
 
-	}
+func Sync(e Exchange){
+	fmt.Println(e.Stop)
+}
+
+func Engine(){
+	k := kraken.New("wss://kraken.com")
+	Sync(k)
 }
